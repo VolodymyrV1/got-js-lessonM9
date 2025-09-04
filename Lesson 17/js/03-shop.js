@@ -94,5 +94,16 @@ function handlerAdd(event) {
     const currentProduct = instruments.find(({ id }) => id === productId);
 
     const products = JSON.parse(localStorage.getItem(PRODUCT_LS_KEY)) || [];
+
+    const index = products.findIndex(({ id }) => id === productId);
+    
+    if(index === -1) {
+        currentProduct.qty = 1;
+        products.push(currentProduct);
+    } else {
+        products[index].qty += 1;
+    }
+
+    localStorage.setItem(PRODUCT_LS_KEY, JSON.stringify(products))
     
 }
